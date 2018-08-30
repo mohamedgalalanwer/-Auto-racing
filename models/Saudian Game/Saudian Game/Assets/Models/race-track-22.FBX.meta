@@ -1,0 +1,134 @@
+fileFormatVersion: 2
+guid: 6b2916af6f2793040980d9bb27fe0a98
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: ad
+    100002: arrow-signs
+    100004: bridge-supports
+    100006: cementFence
+    100008: lamp-posts
+    100010: //RootNode
+    100012: startPosition
+    100014: track-bridge01
+    400000: ad
+    400002: arrow-signs
+    400004: bridge-supports
+    400006: cementFence
+    400008: lamp-posts
+    400010: //RootNode
+    400012: startPosition
+    400014: track-bridge01
+    2100000: concrete
+    2100002: stripes
+    2100004: asphalt
+    2100006: white
+    2100008: metal
+    2100010: ad
+    2100012: concrete-floor
+    2100014: arrow-red
+    2100016: arrow-green
+    2300000: ad
+    2300002: arrow-signs
+    2300004: bridge-supports
+    2300006: cementFence
+    2300008: lamp-posts
+    2300010: startPosition
+    2300012: track-bridge01
+    3300000: ad
+    3300002: arrow-signs
+    3300004: bridge-supports
+    3300006: cementFence
+    3300008: lamp-posts
+    3300010: startPosition
+    3300012: track-bridge01
+    4300000: track-bridge01
+    4300002: bridge-supports
+    4300004: lamp-posts
+    4300006: ad
+    4300008: cementFence
+    4300010: arrow-signs
+    4300012: startPosition
+    7400000: Take 001
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 10
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
