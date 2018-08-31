@@ -309,7 +309,7 @@ public class RG_SceneManager : MonoBehaviour {
 				racerInfo[racerNumber].nextWP += 1;
 				racerInfo[racerNumber].positionScore += 2;
 				if(racerNumber == 0)
-					//racerInfo[racerNumber].currentWaypoint.gameObject.GetComponent<MeshRenderer>().enabled = false;
+					racerInfo[racerNumber].currentWaypoint.gameObject.GetComponent<MeshRenderer>().enabled = false;
 				if (racerInfo [racerNumber].nextWP != TotalWaypoints) {
 					racerInfo [racerNumber].currentWaypoint = Waypoints [racerInfo [racerNumber].nextWP];
 				} else {
@@ -379,7 +379,7 @@ public class RG_SceneManager : MonoBehaviour {
 					}
 				}
 				if(racerNumber == 0)
-					//racerInfo[racerNumber].currentWaypoint.gameObject.GetComponent<MeshRenderer>().enabled = true;
+					racerInfo[racerNumber].currentWaypoint.gameObject.GetComponent<MeshRenderer>().enabled = true;
 				if (racerInfo[racerNumber].nextWP == TotalWaypoints) {
 			//		racerInfo[racerNumber].nextWP = 0;
 			//		ChangeTarget (racerNumber, 0);
