@@ -92,17 +92,17 @@ public class RG_SceneManager : MonoBehaviour {
 	float[] toSort2;
 
 	void Awake(){
-		if (Application.isPlaying) {
+		//if (Application.isPlaying) {
 			Array.Resize (ref racerInfo, raceData.numberOfRacers[raceData.raceNumber]);
 			Array.Resize (ref toSort, raceData.numberOfRacers[raceData.raceNumber]);
 			Array.Resize (ref toSort2, raceData.numberOfRacers[raceData.raceNumber]);
-		}
+		//}
 	}
 
 	void Start () {
-		if (Application.isPlaying) {
+		//if (Application.isPlaying) {
 			Invoke ("StartGame", 0.3f);
-		}
+		//}
 		Time.timeScale = 1.0f;
 	}
 	void StartGame(){
@@ -236,17 +236,19 @@ public class RG_SceneManager : MonoBehaviour {
 	}
 
 	void Update () {
-		#if UNITY_EDITOR
-		if(!Application.isPlaying){			CalculateWaypoints ();		}
-		#endif
+        //#if UNITY_EDITOR
+        //	if(!Application.isPlaying){			
+        CalculateWaypoints ();
+    //}
+		//#endif
 
 		if (gameStarted) {
-			if (Application.isPlaying) {
+			//if (Application.isPlaying) {
 				if (audioData.music.Length > 0) {
 					if (!raceMusicAudioSource.isPlaying)
 						PlayNextAudioTrack ();
 				}
-			}
+			//}
 			if (Input.GetKeyDown (inputData.pauseKey)) {
 				PauseButton ();
 			}
@@ -309,7 +311,7 @@ public class RG_SceneManager : MonoBehaviour {
 				racerInfo[racerNumber].nextWP += 1;
 				racerInfo[racerNumber].positionScore += 2;
 				if(racerNumber == 0)
-					racerInfo[racerNumber].currentWaypoint.gameObject.GetComponent<MeshRenderer>().enabled = false;
+					//racerInfo[racerNumber].currentWaypoint.gameObject.GetComponent<MeshRenderer>().enabled = false;
 				if (racerInfo [racerNumber].nextWP != TotalWaypoints) {
 					racerInfo [racerNumber].currentWaypoint = Waypoints [racerInfo [racerNumber].nextWP];
 				} else {
@@ -379,7 +381,7 @@ public class RG_SceneManager : MonoBehaviour {
 					}
 				}
 				if(racerNumber == 0)
-					racerInfo[racerNumber].currentWaypoint.gameObject.GetComponent<MeshRenderer>().enabled = true;
+					//racerInfo[racerNumber].currentWaypoint.gameObject.GetComponent<MeshRenderer>().enabled = true;
 				if (racerInfo[racerNumber].nextWP == TotalWaypoints) {
 			//		racerInfo[racerNumber].nextWP = 0;
 			//		ChangeTarget (racerNumber, 0);
@@ -394,7 +396,7 @@ public class RG_SceneManager : MonoBehaviour {
 	void CalculateRacerPositions() {
 		canCalculatePosition = false;
 
-		if (Application.isPlaying && gameStarted) {
+		if (/*Application.isPlaying && */gameStarted) {
 			float distance;
 			for (int i = 0; i < racerInfo.Length; i ++) {
 				racerInfo [i].checkpointDistance = Vector3.Distance (racerInfo [i].racer.transform.position, racerInfo [i].currentWaypoint.position);

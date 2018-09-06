@@ -3,9 +3,12 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System;
+using GoogleMobileAds.Api;
 
 [ExecuteInEditMode]
 public class RG_GarageManager : MonoBehaviour {
+	private RewardBasedVideoAd rewardBasedVideo;
+	private InterstitialAd interstitial;
 	public enum Switch { On, Off }
 	public enum MusicSelection { ListOrder, Random }
 	[System.Serializable]
@@ -145,7 +148,7 @@ public class RG_GarageManager : MonoBehaviour {
             PlayerPrefs.DeleteAll();
             PlayerPrefs.SetString("CURRENTVERSION", "1.04");
         }
-		if (Application.isPlaying) {
+		//if (Application.isPlaying) {
 			audioContainer = new GameObject ();
 			audioContainer.name = "Audio Container";
 			audioContainer.transform.SetParent (gameObject.transform);
@@ -202,7 +205,7 @@ public class RG_GarageManager : MonoBehaviour {
 			} else {
 				PlayerPrefs.SetString ("AutoUnlockNextRace", "FALSE");
 			}
-		}
+		//}
 		UpdateCar ();
 	}
 
@@ -289,7 +292,7 @@ public class RG_GarageManager : MonoBehaviour {
 
 	// Here we check to see if the player is in a car part color modification menu and update the cloor changes in real time as they adjust sliders
 	public void Update(){
-		if(Application.isPlaying){
+		//if(Application.isPlaying){
 			if(audioData.music.Length > 0){
 				if(!garageAudioSource.isPlaying)		PlayNextAudioTrack ();
 			}
@@ -298,7 +301,7 @@ public class RG_GarageManager : MonoBehaviour {
 			if(rimColorChange) RimColor ();
 			if(glassColorChange) GlassColor ();
 			if(glowChange) GlowColor();
-		}
+		//}
 	}
 
 	// These methods are used for the main menu
@@ -528,34 +531,59 @@ public class RG_GarageManager : MonoBehaviour {
 
 	public void Button_BuyCar() {
         uI.buyCarText.text = "Buy " + playableVehicles.vehicleNames[vehicleNumber].ToString() + "\nfor\n$" + playableVehicles.price[vehicleNumber].ToString("N0");
-        if (currency >= playableVehicles.price[vehicleNumber])
-            uI.carConfirmWindow.SetActive(true);
+		if (currency >= playableVehicles.price [vehicleNumber]) {
+			uI.carConfirmWindow.SetActive (true);
+		}else {
+			this.RequestRewardBasedVideo ();
+		}
         AudioMenuSelect();
     }
 
     public void SelectGlow(){
 		AudioMenuSelect ();
-		if(currency >= playableVehicles.glowPrice)	uI.glowConfirmWindow.SetActive(true);
+		if (currency >= playableVehicles.glowPrice) {
+			uI.glowConfirmWindow.SetActive (true);
+		}else {
+			this.RequestRewardBasedVideo ();
+		}
 	}    
 
     public void SelectPaint(){
 		AudioMenuSelect ();
-		if(currency >= playableVehicles.paintPrice)	uI.paintConfirmWindow.SetActive(true);
+		Debug.Log (currency);
+		if (currency >= playableVehicles.paintPrice) {	
+			uI.paintConfirmWindow.SetActive (true);
+		} else {
+			this.RequestRewardBasedVideo ();
+		}
+
 	}
 
 	public void SelectBrakeColor(){
 		AudioMenuSelect ();
-		if(currency >= playableVehicles.brakeColorPrice)	uI.brakeColorConfirmWindow.SetActive(true);
+		if (currency >= playableVehicles.brakeColorPrice) {	
+			uI.brakeColorConfirmWindow.SetActive (true);
+		}else {
+			this.RequestRewardBasedVideo ();
+		}
 	}
 
 	public void SelectRimColor(){
 		AudioMenuSelect ();
-		if(currency >= playableVehicles.rimColorPrice)	uI.rimColorConfirmWindow.SetActive(true);
+		if (currency >= playableVehicles.rimColorPrice) {
+			uI.rimColorConfirmWindow.SetActive (true);
+		} else {
+			this.RequestRewardBasedVideo ();
+		}
 	}
 
 	public void SelectGlassColor(){
 		AudioMenuSelect ();
-		if(currency >= playableVehicles.glassColorPrice)	uI.glassColorConfirmWindow.SetActive(true);
+		if (currency >= playableVehicles.glassColorPrice) {
+			uI.glassColorConfirmWindow.SetActive (true);
+		}else {
+			this.RequestRewardBasedVideo ();
+		}
 	}
 	#endregion
 
@@ -820,31 +848,49 @@ public class RG_GarageManager : MonoBehaviour {
     public void Button_TopSpeed() {
         AudioMenuSelect();
 		uI.upgradeConfirmText.text = "Upgrade " + "Top Speed" + "\nfor\n$" + playableVehicles.upgradeSpeedPrice.ToString("N0");
-		if (currency >= playableVehicles.upgradeSpeedPrice) uI.upgradesConfirmWindow.SetActive(true);
+		if (currency >= playableVehicles.upgradeSpeedPrice) {
+			uI.upgradesConfirmWindow.SetActive (true);
+		}else {
+			this.RequestRewardBasedVideo ();
+		}
     }
 
     public void Button_Acceleration() {
         AudioMenuSelect();
 		uI.upgradeConfirmText.text = "Upgrade " + "Acceleration" + "\nfor\n$" + playableVehicles.upgradeAccelerationPrice.ToString("N0");
-		if (currency >= playableVehicles.upgradeAccelerationPrice) uI.upgradesConfirmWindow.SetActive(true);
+		if (currency >= playableVehicles.upgradeAccelerationPrice) {
+			uI.upgradesConfirmWindow.SetActive (true);
+		}else {
+			this.RequestRewardBasedVideo ();
+		}
     }
 
     public void Button_BrakePower() {
         AudioMenuSelect();
 		uI.upgradeConfirmText.text = "Upgrade " + "Brake Power" + "\nfor\n$" + playableVehicles.upgradeBrakesPrice.ToString("N0");
-		if (currency >= playableVehicles.upgradeBrakesPrice) uI.upgradesConfirmWindow.SetActive(true);
+		if (currency >= playableVehicles.upgradeBrakesPrice) { 
+			uI.upgradesConfirmWindow.SetActive (true);
+		}else {
+			this.RequestRewardBasedVideo ();
+		}
     }
 
     public void Button_TireTraction() {
         AudioMenuSelect();
 		uI.upgradeConfirmText.text = "Upgrade " + "Tire Traction" + "\nfor\n$" + playableVehicles.upgradeTiresPrice.ToString("N0");
-		if (currency >= playableVehicles.upgradeTiresPrice) uI.upgradesConfirmWindow.SetActive(true);
+		if (currency >= playableVehicles.upgradeTiresPrice) {
+			uI.upgradesConfirmWindow.SetActive (true);
+		}else {
+			this.RequestRewardBasedVideo ();
+		}
     }
 
     public void Button_SteerSensitivity() {
         AudioMenuSelect();
 		uI.upgradeConfirmText.text = "Upgrade " + "Steer Sensitivity" + "\nfor\n$" + playableVehicles.upgradeSteeringPrice.ToString("N0");
-		if (currency >= playableVehicles.upgradeSteeringPrice) uI.upgradesConfirmWindow.SetActive(true);
+		if (currency >= playableVehicles.upgradeSteeringPrice) {
+			uI.upgradesConfirmWindow.SetActive (true);
+		}
     }
 		
 	// Call this to cancel a purchase confirmation
@@ -992,7 +1038,11 @@ public class RG_GarageManager : MonoBehaviour {
 			PlayerPrefs.SetInt ("Race Reward1", raceData.firstPrize[raceNumber] * raceData.raceLaps [raceNumber] * raceData.numberOfRacers[raceNumber]);
 			PlayerPrefs.SetInt ("Race Reward2", raceData.secondPrize[raceNumber] * raceData.raceLaps [raceNumber] * raceData.numberOfRacers[raceNumber]);
 			PlayerPrefs.SetInt ("Race Reward3", raceData.thirdPrize[raceNumber] * raceData.raceLaps [raceNumber] * raceData.numberOfRacers[raceNumber]);
-			raceNameToLoad = raceNumber.ToString () + raceData.raceNames[raceNumber];
+			raceNameToLoad = /*raceNumber.ToString () +*/  raceData.raceNames[raceNumber];
+			RequestInterstitial ();
+			if (interstitial.IsLoaded()) {
+				interstitial.Show();
+			}
 			SceneManager.LoadScene(raceNameToLoad); 
 		} else {
 
@@ -1118,6 +1168,10 @@ public class RG_GarageManager : MonoBehaviour {
 	public void LoadOpenWorldButton(){
 		uI.loadingWindow.SetActive(true);
 		PlayerPrefs.SetString ("Game Mode", "SINGLE PLAYER");
+		RequestInterstitial ();
+		if (interstitial.IsLoaded()) {
+			interstitial.Show();
+		}
 		SceneManager.LoadScene(openWorldName);
 	}
 	#endregion
@@ -1172,5 +1226,64 @@ public class RG_GarageManager : MonoBehaviour {
 
 		uI.rewardText.text = "\n" + firstPrize.ToString("C0") + "\n" + secondPrize.ToString("C0") + "\n" + thirdPrize.ToString("C0");
 	}
+
+	private void RequestRewardBasedVideo()
+	{
+		string adID = "ca-app-pub-8812320259916523/4106966208";
+
+		#if UNITY_ANDROID
+		string adUnitId = adID;
+		#elif UNITY_IOS
+		string adUnitId = adID;
+		#else
+		string adUnitId = adID;
+		#endif
+
+		RewardBasedVideoAd rewardBasedVideo = RewardBasedVideoAd.Instance;
+
+		AdRequest request = new AdRequest.Builder().Build();
+		rewardBasedVideo.LoadAd(request, adUnitId);
+
+		//Show Ad
+		showAdd(rewardBasedVideo);
+	}
+
+	private void showAdd(RewardBasedVideoAd rewardBasedVideo)
+	{
+	  if (rewardBasedVideo.IsLoaded())
+	   {
+		//Subscribe to Ad event
+		rewardBasedVideo.OnAdRewarded += HandleRewardBasedVideoRewarded;
+		rewardBasedVideo.Show();
+	   }
+	}
+
+	public void HandleRewardBasedVideoRewarded(object sender, Reward args)
+	{
+		string type = args.Type;
+		double amount = args.Amount;
+		//Reawrd User here
+		currency += 1000;
+		Debug.Log (currency);
+		MonoBehaviour.print("User rewarded with: " + amount.ToString() + " " + type);
+	}
+
+		private void RequestInterstitial()
+		{
+		#if UNITY_ANDROID
+		string adUnitId = "ca-app-pub-8812320259916523/8593006128";
+		#elif UNITY_IPHONE
+		string adUnitId = "ca-app-pub-3940256099942544/4411468910";
+		#else
+		string adUnitId = "unexpected_platform";
+		#endif
+
+		// Initialize an InterstitialAd.
+		interstitial = new InterstitialAd(adUnitId);
+		// Create an empty ad request.
+		AdRequest request = new AdRequest.Builder().Build();
+		// Load the interstitial with the request.
+		interstitial.LoadAd(request);
+		}
 
 }
