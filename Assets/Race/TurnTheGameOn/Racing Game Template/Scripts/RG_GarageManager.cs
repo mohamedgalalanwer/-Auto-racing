@@ -84,6 +84,7 @@ public class RG_GarageManager : MonoBehaviour {
 		public GameObject glassColorWindow;
 		public GameObject brakeColorWindow;
 		public GameObject paintConfirmWindow;
+		public GameObject coinConfirmWindw;
 		public GameObject rimColorConfirmWindow;
 		public GameObject glassColorConfirmWindow;
 		public GameObject brakeColorConfirmWindow;
@@ -534,7 +535,7 @@ public class RG_GarageManager : MonoBehaviour {
 		if (currency >= playableVehicles.price [vehicleNumber]) {
 			uI.carConfirmWindow.SetActive (true);
 		}else {
-			this.RequestRewardBasedVideo ();
+			uI.coinConfirmWindw.SetActive (true);
 		}
         AudioMenuSelect();
     }
@@ -544,7 +545,7 @@ public class RG_GarageManager : MonoBehaviour {
 		if (currency >= playableVehicles.glowPrice) {
 			uI.glowConfirmWindow.SetActive (true);
 		}else {
-			this.RequestRewardBasedVideo ();
+			uI.coinConfirmWindw.SetActive (true);
 		}
 	}    
 
@@ -554,7 +555,7 @@ public class RG_GarageManager : MonoBehaviour {
 		if (currency >= playableVehicles.paintPrice) {	
 			uI.paintConfirmWindow.SetActive (true);
 		} else {
-			this.RequestRewardBasedVideo ();
+			uI.coinConfirmWindw.SetActive (true);
 		}
 
 	}
@@ -564,7 +565,7 @@ public class RG_GarageManager : MonoBehaviour {
 		if (currency >= playableVehicles.brakeColorPrice) {	
 			uI.brakeColorConfirmWindow.SetActive (true);
 		}else {
-			this.RequestRewardBasedVideo ();
+			uI.coinConfirmWindw.SetActive (true);
 		}
 	}
 
@@ -573,7 +574,7 @@ public class RG_GarageManager : MonoBehaviour {
 		if (currency >= playableVehicles.rimColorPrice) {
 			uI.rimColorConfirmWindow.SetActive (true);
 		} else {
-			this.RequestRewardBasedVideo ();
+			uI.coinConfirmWindw.SetActive (true);
 		}
 	}
 
@@ -582,7 +583,7 @@ public class RG_GarageManager : MonoBehaviour {
 		if (currency >= playableVehicles.glassColorPrice) {
 			uI.glassColorConfirmWindow.SetActive (true);
 		}else {
-			this.RequestRewardBasedVideo ();
+			uI.coinConfirmWindw.SetActive (true);
 		}
 	}
 	#endregion
@@ -851,7 +852,7 @@ public class RG_GarageManager : MonoBehaviour {
 		if (currency >= playableVehicles.upgradeSpeedPrice) {
 			uI.upgradesConfirmWindow.SetActive (true);
 		}else {
-			this.RequestRewardBasedVideo ();
+			uI.coinConfirmWindw.SetActive (true);
 		}
     }
 
@@ -861,7 +862,7 @@ public class RG_GarageManager : MonoBehaviour {
 		if (currency >= playableVehicles.upgradeAccelerationPrice) {
 			uI.upgradesConfirmWindow.SetActive (true);
 		}else {
-			this.RequestRewardBasedVideo ();
+			uI.coinConfirmWindw.SetActive (true);
 		}
     }
 
@@ -871,7 +872,7 @@ public class RG_GarageManager : MonoBehaviour {
 		if (currency >= playableVehicles.upgradeBrakesPrice) { 
 			uI.upgradesConfirmWindow.SetActive (true);
 		}else {
-			this.RequestRewardBasedVideo ();
+			uI.coinConfirmWindw.SetActive (true);
 		}
     }
 
@@ -881,7 +882,7 @@ public class RG_GarageManager : MonoBehaviour {
 		if (currency >= playableVehicles.upgradeTiresPrice) {
 			uI.upgradesConfirmWindow.SetActive (true);
 		}else {
-			this.RequestRewardBasedVideo ();
+			uI.coinConfirmWindw.SetActive (true);
 		}
     }
 
@@ -890,6 +891,8 @@ public class RG_GarageManager : MonoBehaviour {
 		uI.upgradeConfirmText.text = "Upgrade " + "Steer Sensitivity" + "\nfor\n$" + playableVehicles.upgradeSteeringPrice.ToString("N0");
 		if (currency >= playableVehicles.upgradeSteeringPrice) {
 			uI.upgradesConfirmWindow.SetActive (true);
+		} else {
+			uI.coinConfirmWindw.SetActive (true);
 		}
     }
 		
@@ -903,6 +906,7 @@ public class RG_GarageManager : MonoBehaviour {
 		uI.rimColorConfirmWindow.SetActive(false);
 		uI.unlockRaceConfirmWindow.SetActive (false);
         uI.upgradesConfirmWindow.SetActive(false);
+		uI.coinConfirmWindw.SetActive (false);
         AudioMenuBack();
 	}
 
@@ -1264,6 +1268,7 @@ public class RG_GarageManager : MonoBehaviour {
 		double amount = args.Amount;
 		//Reawrd User here
 		currency += 1000;
+		uI.coinConfirmWindw.SetActive (false);
 		Debug.Log (currency);
 		MonoBehaviour.print("User rewarded with: " + amount.ToString() + " " + type);
 	}
@@ -1284,6 +1289,10 @@ public class RG_GarageManager : MonoBehaviour {
 		AdRequest request = new AdRequest.Builder().Build();
 		// Load the interstitial with the request.
 		interstitial.LoadAd(request);
+		}
+
+		public void DisplayAds(){
+		this.RequestRewardBasedVideo ();
 		}
 
 }
